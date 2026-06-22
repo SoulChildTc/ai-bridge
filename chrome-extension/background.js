@@ -23,6 +23,7 @@ async function getSettings() {
 // ---------- WebSocket 连接 ----------
 
 let connectAttempts = 0;
+let isManualDisconnect = false;
 
 function updateConnectionState(state, detail, nextRetry) {
   chrome.storage.local.set({ connectionState: { state, detail, time: Date.now(), nextRetry: nextRetry || null } });
@@ -66,7 +67,10 @@ async function connect() {
 
     ws.onclose = (event) => {
       ws = null;
-      // 重试等待期间保持橙色，不变红
+      if (isManualDisconnect) {
+        isManualDisconnect = false;
+        return;
+      }
       updateBadge("...", "#FF9800");
       const nextRetry = Date.now() + 10000;
       updateConnectionState("retrying", `连接断开，等待重连...`, nextRetry);
@@ -74,6 +78,7 @@ async function connect() {
     };
 
     ws.onerror = (error) => {
+      if (isManualDisconnect) return;
       const nextRetry = Date.now() + 10000;
       updateConnectionState("retrying", `连接失败（第 ${connectAttempts} 次），等待重连...`, nextRetry);
     };
@@ -84,12 +89,14 @@ async function connect() {
 }
 
 function disconnect() {
+  isManualDisconnect = true;
   clearReconnectTimer();
   if (ws) {
     ws.close();
     ws = null;
   }
   updateBadge("", "");
+  updateConnectionState("disabled", "连接未启用");
 }
 
 function scheduleReconnect() {
@@ -329,16 +336,26 @@ chrome.alarms.onAlarm.addListener((alarm) => {
 
 // ---------- 启动时自动连接 ----------
 
-chrome.runtime.onInstalled.addListener(() => {
-  connect();
-  startKeepAlive();
+chrome.runtime.onInstalled.addListener(async () => {
+  const { enabled } = await getSettings();
+  if (enabled) {
+    connect();
+    startKeepAlive();
+  }
 });
 
-chrome.runtime.onStartup.addListener(() => {
-  connect();
-  startKeepAlive();
+chrome.runtime.onStartup.addListener(async () => {
+  const { enabled } = await getSettings();
+  if (enabled) {
+    connect();
+    startKeepAlive();
+  }
 });
 
-// Service Worker 重启时也连接
-connect();
-startKeepAlive();
+(async () => {
+  const { enabled } = await getSettings();
+  if (enabled) {
+    connect();
+    startKeepAlive();
+  }
+})();

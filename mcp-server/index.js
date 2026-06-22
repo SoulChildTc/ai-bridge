@@ -250,7 +250,7 @@ async function sendToExtension(action, payload, timeoutMs = 180000) {
 
 const server = new McpServer({
   name: "ai-bridge",
-  version: "1.0.0",
+  version: "1.1.0",
 });
 
 server.tool(
