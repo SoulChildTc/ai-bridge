@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <style>
+    body {
+      width: 320px;
+      padding: 16px;
+      font-family: -apple-system, system-ui, sans-serif;
+      font-size: 14px;
+      color: #333;
+    }
+    h2 {
+      margin: 0 0 16px;
+      font-size: 16px;
+    }
+    .status {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 16px;
+      padding: 8px 12px;
+      border-radius: 6px;
+      font-size: 13px;
+    }
+    .status.connected {
+      background: #e8f5e9;
+      color: #2e7d32;
+    }
+    .status.disconnected {
+      background: #fbe9e7;
+      color: #c62828;
+    }
+    .status.connecting {
+      background: #fff3e0;
+      color: #e65100;
+    }
+    .dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+    }
+    .connected .dot { background: #4caf50; }
+    .disconnected .dot { background: #f44336; }
+    label {
+      display: block;
+      margin-bottom: 4px;
+      font-weight: 500;
+      font-size: 13px;
+      color: #555;
+    }
+    input[type="text"] {
+      width: 100%;
+      padding: 8px;
+      margin-bottom: 12px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      font-size: 13px;
+      box-sizing: border-box;
+    }
+    .toggle-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 16px;
+    }
+    .toggle {
+      position: relative;
+      width: 40px;
+      height: 22px;
+    }
+    .toggle input {
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+    .slider {
+      position: absolute;
+      cursor: pointer;
+      inset: 0;
+      background: #ccc;
+      border-radius: 22px;
+      transition: 0.2s;
+    }
+    .slider::before {
+      content: "";
+      position: absolute;
+      width: 16px;
+      height: 16px;
+      left: 3px;
+      bottom: 3px;
+      background: white;
+      border-radius: 50%;
+      transition: 0.2s;
+    }
+    .toggle input:checked + .slider {
+      background: #f44336;
+    }
+    .toggle input:checked + .slider.connected {
+      background: #4caf50;
+    }
+    .toggle input:checked + .slider::before {
+      transform: translateX(18px);
+    }
+    button {
+      width: 100%;
+      padding: 8px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      background: #f5f5f5;
+      cursor: pointer;
+      font-size: 13px;
+    }
+    button:hover {
+      background: #eee;
+    }
+    .hint {
+      margin-top: 12px;
+      font-size: 12px;
+      color: #999;
+      line-height: 1.5;
+    }
+  </style>
+</head>
+<body>
+  <h2>AI Bridge</h2>
+
+  <div id="status" class="status disconnected">
+    <span class="dot"></span>
+    <span id="statusText">未连接</span>
+  </div>
+
+  <div class="toggle-row">
+    <label>启用连接</label>
+    <label class="toggle">
+      <input type="checkbox" id="enabled">
+      <span class="slider"></span>
+    </label>
+  </div>
+
+  <label>服务器地址</label>
+  <input type="text" id="serverUrl" placeholder="ws://localhost:9527">
+
+  <label>Token</label>
+  <input type="text" id="token" placeholder="输入 Token">
+
+  <button id="saveBtn">保存设置</button>
+
+  <div class="hint">
+    确保 MCP Server 已启动，且 Token 与 MCP Server 配置一致。
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>

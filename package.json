@@ -1,0 +1,47 @@
+{
+  "name": "@soulchildtc/ai-bridge-mcp",
+  "version": "1.0.0",
+  "description": "让终端 AI 编程助手通过浏览器与更强的 AI 模型对话（MCP Server + Chrome 插件）",
+  "type": "module",
+  "bin": {
+    "ai-bridge-mcp": "./mcp-server/index.js"
+  },
+  "files": [
+    "mcp-server/",
+    "chrome-extension/",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "start": "node mcp-server/index.js",
+    "install-mcp": "node mcp-server/index.js install"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.1.0",
+    "ws": "^8.18.1",
+    "zod": "^3.24.3"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "keywords": [
+    "mcp",
+    "ai",
+    "bridge",
+    "opencode",
+    "deepseek",
+    "chatgpt",
+    "doubao",
+    "browser-automation"
+  ],
+  "author": "SoulChild",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/soulchildtc/ai-bridge.git"
+  },
+  "bugs": {
+    "url": "https://github.com/soulchildtc/ai-bridge/issues"
+  },
+  "homepage": "https://github.com/soulchildtc/ai-bridge#readme"
+}
