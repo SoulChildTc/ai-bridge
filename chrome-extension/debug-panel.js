@@ -61,8 +61,8 @@
       defaultMethod: "shortcut",
       hideSelectorWhen: ["shortcut", "url"],
       extraFields: [
-        { key: "newChatShortcut", label: "快捷键", placeholder: "如: shift+meta+k", showWhen: "shortcut", testable: true },
-        { key: "newChatUrl", label: "URL", placeholder: "如: /chat/", showWhen: "url", testable: true },
+        { key: "newChatShortcut", label: "快捷键", placeholder: "如: shift+meta+k", showWhen: "shortcut" },
+        { key: "newChatUrl", label: "URL", placeholder: "如: /chat/", showWhen: "url" },
       ],
     },
   ];
@@ -88,7 +88,7 @@
         #ai-bridge-debug .field { margin-bottom: 6px; padding: 6px 8px; background: #252525; border-radius: 6px; }
         #ai-bridge-debug label { display: inline; color: #888; font-size: 11px; margin-right: 4px; }
         #ai-bridge-debug .field-title { color: #ccc; font-size: 12px; font-weight: 600; margin-bottom: 4px; display: flex; align-items: center; justify-content: space-between; }
-        #ai-bridge-debug .row { display: flex; gap: 3px; margin-bottom: 3px; }
+        #ai-bridge-debug .row { display: flex; gap: 3px; margin-bottom: 3px; align-items: center; }
         #ai-bridge-debug input[type="text"] {
           flex: 1; padding: 3px 6px; background: #1a1a1a; color: #eee;
           border: 1px solid #3a3a3a; border-radius: 3px; font-size: 11px; font-family: monospace;
