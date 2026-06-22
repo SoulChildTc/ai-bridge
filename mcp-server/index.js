@@ -272,7 +272,7 @@ server.tool(
 
 server.tool(
   "new_session",
-  "向更强的 AI 模型发起新的咨询对话。返回值中包含 sessionUrl 和 platform，后续调用 ask_ai 时必须传入这两个值。不要在消息中包含密钥等敏感信息。注意：如果你的上下文中已有之前 new_session 返回的 sessionUrl，应优先使用 ask_ai 继续该对话，而不是创建新会话。只在以下情况使用 new_session：1) 上下文中没有 sessionUrl（首次咨询）2) 用户明确要求新建对话。",
+  "向 Web AI 对话服务发起新的咨询对话。返回值中包含 sessionUrl 和 platform，后续调用 ask_ai 时必须传入这两个值。不要在消息中包含密钥等敏感信息。注意：如果你的上下文中已有之前 new_session 返回的 sessionUrl，应优先使用 ask_ai 继续该对话，而不是创建新会话。只在以下情况使用 new_session：1) 上下文中没有 sessionUrl（首次咨询）2) 用户明确要求新建对话。",
   {
     message: z.string().describe("你要咨询的问题，包括问题描述、已尝试的方案、卡在哪里、关键代码片段"),
     platform: z.enum(["doubao", "chatgpt"]).default("doubao").describe("使用哪个 AI 平台：doubao（豆包）或 chatgpt"),

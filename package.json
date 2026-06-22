@@ -1,7 +1,7 @@
 {
   "name": "@soulchildtc/ai-bridge-mcp",
   "version": "1.0.0",
-  "description": "让终端 AI 编程助手通过浏览器与更强的 AI 模型对话（MCP Server + Chrome 插件）",
+  "description": "让终端 AI 编程助手通过浏览器使用 Web AI 对话服务（MCP Server + Chrome 插件）",
   "type": "module",
   "bin": {
     "ai-bridge-mcp": "./mcp-server/index.js"

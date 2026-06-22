@@ -2,7 +2,7 @@
 
 ## 项目概述
 
-AI Bridge 是一个让终端 AI 编程助手（如 OpenCode 中的 DeepSeek）通过浏览器与更强 AI 模型（豆包、ChatGPT）对话的工具。由 MCP Server（Node.js）和 Chrome 插件两部分组成，通过 WebSocket 通信。
+AI Bridge 是一个让终端 AI 编程助手（如 OpenCode 中的 DeepSeek）通过浏览器使用 Web AI 对话服务（豆包、ChatGPT）的工具。由 MCP Server（Node.js）和 Chrome 插件两部分组成，通过 WebSocket 通信。
 
 ## 架构
 
