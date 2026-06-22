@@ -154,14 +154,15 @@ function connectAsClient() {
     }
   });
 
-  wsClient.on("close", () => {
-    log("[ws] 副实例：与主实例断开");
+  wsClient.on("close", (code, reason) => {
+    const reasonStr = reason ? `, reason: ${reason}` : "";
+    log(`[ws] 副实例：与主实例断开 (code: ${code}${reasonStr})`);
     proxySocket = null;
     clientReconnectTimer = setTimeout(connectAsClient, 10000);
   });
 
-  wsClient.on("error", () => {
-    // error 后一定会触发 close，不在这里重连
+  wsClient.on("error", (err) => {
+    log(`[ws] 副实例：连接错误: ${err.message}`);
   });
 }
 
