@@ -436,6 +436,31 @@ async function install(token) {
   console.log(`  1. Chrome 加载插件: chrome://extensions → 加载已解压的扩展 → 选择 ${extTarget}`);
   console.log(`  2. 插件设置: Token 填 "${token}"，开启连接`);
   console.log("  3. 启动 OpenCode 即可使用");
+
+  // 通用 MCP 配置指引
+  console.log("");
+  console.log("--- 在其它 Coding Agent 中使用 ---");
+  console.log("");
+  console.log("ai-bridge 也兼容所有支持 MCP 协议的 Coding Agent（Claude Code、Cursor、");
+  console.log("Windsurf、Gemini CLI 等）。将以下 JSON 添加到对应工具的 MCP 配置文件中：");
+  console.log("");
+  const snippet = {
+    mcpServers: {
+      "ai-bridge": {
+        command: "npx",
+        args: ["-y", PACKAGE_NAME],
+        ...(token ? { env: { AI_BRIDGE_MCP_TOKEN: token } } : {}),
+      },
+    },
+  };
+  console.log(JSON.stringify(snippet, null, 2));
+  console.log("");
+  console.log("各工具的配置文件路径:");
+  console.log("  Claude Code  → ~/.claude.json 或 .mcp.json");
+  console.log("  Cursor       → .cursor/mcp.json");
+  console.log("  Gemini CLI   → .gemini/settings.json");
+  console.log("  Windsurf     → .windsurf/mcp_config.json");
+  console.log("  OpenCode     → 已自动配置");
 }
 
 // ============================================
